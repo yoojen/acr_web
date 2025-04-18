@@ -215,6 +215,7 @@ const Blog = () => {
           message={message}
           error={error}
           setTitle={setTitle}
+          creatingNewBlog={creatingNewBlog}
           setIsEditing={setIsEditing}
           setCreatingNewBlog={setCreatingNewBlog}
           handleCreateOrBlogBlog={handleCreateOrEditBlog}

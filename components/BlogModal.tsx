@@ -9,6 +9,7 @@ interface BlogModalProps {
   description?: string;
   message: string;
   error: string;
+  creatingNewBlog: boolean;
   setTitle: (value: string) => void;
   setCreatingNewBlog: (value: boolean) => void;
   setIsEditing: (value: boolean) => void;
@@ -23,6 +24,7 @@ const BlogModal = ({
   description,
   error,
   message,
+  creatingNewBlog,
   setTitle,
   setIsEditing,
   setCreatingNewBlog,
@@ -90,7 +92,7 @@ const BlogModal = ({
             </div>
           </div>
           <div className="my-3 flex flex-col">
-            <button type="submit">{title ? "Update" : "Post"}</button>
+            <button type="submit">{creatingNewBlog ? "Post" : "Update"}</button>
           </div>
         </form>
       </div>

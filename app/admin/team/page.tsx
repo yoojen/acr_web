@@ -9,6 +9,7 @@ import useSWR, { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
 import { requestAxios } from "@/api";
 import Link from "next/link";
+import { uploadBase64Image } from "@/utils/upload_utils";
 
 
 async function fetcher(url: string) {
@@ -34,23 +35,6 @@ async function deleteTeamMember(url: string, { arg }: { arg: { id: string } }) {
   return response.data;
 }
 
-export async function uploadBase64Image(url: string, imageBase64: File) {
-  try {
-    const formData = new FormData();
-    formData.append("image", imageBase64);
-
-    const response = await requestAxios.post(url, formData, {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return response.data.image_url;
-  } catch (error) {
-    console.error("Error uploading image:", error);
-    return null;
-  }
-}
 
 function TeamManagementPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)

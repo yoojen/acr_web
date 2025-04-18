@@ -61,3 +61,21 @@ export const imageHandler = (editor: Editor, url: string) => {
     }
   };
 };
+
+export async function uploadBase64Image(url: string, imageBase64: File) {
+  try {
+    const formData = new FormData();
+    formData.append("image", imageBase64);
+
+    const response = await requestAxios.post(url, formData, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data.image_url;
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    return null;
+  }
+}

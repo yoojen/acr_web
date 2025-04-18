@@ -3,7 +3,7 @@ import Image from "next/image";
 import components from "../components";
 import withAuth from "@/HOC/withAuth";
 import { useEffect, useState } from "react";
-import { ACRTeamObject } from "@/interface";
+import { ACRTeamObject, ApiResponseError } from "@/interface";
 import { useSideBar } from "@/context/navigationContext";
 import useSWR, { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
@@ -104,8 +104,8 @@ function TeamManagementPage() {
         setMessage("Updated successfully")
         setIsModalOpen(false);
       } catch (error: unknown) {
-        if (error instanceof Error && (error as any).response) {
-          setError((error as any).response.data.message)
+        if (error instanceof Error && (error as ApiResponseError).response) {
+          setError((error as ApiResponseError).response.data.message)
         } else {
           setError("Failed to update member")
         }
@@ -136,8 +136,8 @@ function TeamManagementPage() {
         setPreviewImage("")
         setIsModalOpen(false);
       } catch (error: unknown) {
-        if (error instanceof Error && (error as any).response) {
-          setError((error as any).response.data.message)
+        if (error instanceof Error && (error as ApiResponseError).response) {
+          setError((error as ApiResponseError).response.data.message)
         } else {
           setError("Failed to create member")
         }
@@ -162,8 +162,8 @@ function TeamManagementPage() {
         setMessage("Member deleted successfully")
         mutate("/team-info")
       } catch (error: unknown) {
-        if (error instanceof Error && (error as any).response) {
-          setError((error as any).response.data.message)
+        if (error instanceof Error && (error as ApiResponseError).response) {
+          setError((error as ApiResponseError).response.data.message)
         } else {
           setError("failed to delete")
         }

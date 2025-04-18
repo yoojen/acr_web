@@ -2,6 +2,7 @@
 
 import { requestAxios } from "@/api";
 import { blogObject } from "@/app/admin/blog/page";
+import { ApiResponseError } from "@/interface";
 import { Dispatch, SetStateAction } from "react";
 
 interface PaginateProps {
@@ -26,7 +27,7 @@ const Paginate = ({ total_pages, current_page, requestURL, setBlogs, setError }:
                 }
             } catch (error: unknown) {
                 if (error instanceof Error && 'response' in error && setError) {
-                    setError((error as any).response?.data?.message || "Failed to fetch");
+                    setError((error as ApiResponseError).response?.data?.message || "Failed to fetch");
                 } else {
                     if (setError) {
                         setError("Failed to fetch");

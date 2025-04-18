@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import { AiOutlineClose } from "react-icons/ai";
 import { requestAxios } from "@/api";
 import useSWRMutation from "swr/mutation";
+import { ApiResponseError } from "@/interface";
 
 
 export async function subscribeToNewsLetter(url: string, { arg }: { arg: { email: string } }) {
@@ -57,8 +58,8 @@ const SubscribePopUp = () => {
       setMessage("You have successfully subscribed to our newsletter")
       setError("")
     } catch (error: unknown) {
-      if (error instanceof Error && (error as any).response) {
-        setError((error as any).response.data.message)
+      if (error instanceof Error && (error as ApiResponseError).response) {
+        setError((error as ApiResponseError).response.data.message)
       } else {
         setError("failed to subscribe")
       }

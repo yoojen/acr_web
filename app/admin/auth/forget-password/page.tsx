@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 import { requestAxios } from "@/api";
 import { useAuth } from "@/context/authContext";
 import { useRouter } from "next/navigation";
+import { ApiResponseError } from "@/interface";
 
 const ForgetPassword = () => {
     const [email, setEmail] = useState<string>('')
@@ -41,7 +42,7 @@ const ForgetPassword = () => {
                 }
             } catch (error) {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                setError((error as any)?.response?.data?.message || 'Something went wrong try again')
+                setError((error as ApiResponseError)?.response?.data?.message || 'Something went wrong try again')
                 return;
             }
         }())

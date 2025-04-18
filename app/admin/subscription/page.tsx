@@ -2,7 +2,7 @@
 import withAuth from "@/HOC/withAuth";
 import components from "../components";
 import { useEffect, useState } from "react";
-import { Subscriber } from "@/interface";
+import { ApiResponseError, Subscriber } from "@/interface";
 import TiptapEditor from "@/components/TipTapEditor";
 import { requestAxios } from "@/api";
 import useSWR, { mutate } from "swr";
@@ -88,8 +88,8 @@ function SubscriptionManagementPage() {
       mutate("/subscriptions")
 
     } catch (error: unknown) {
-      if ((error as any)?.response) {
-        setError((error as any).response.data.message)
+      if ((error as ApiResponseError)?.response) {
+        setError((error as ApiResponseError).response.data.message)
       } else {
         setError("Failed to create member")
       }
@@ -111,8 +111,8 @@ function SubscriptionManagementPage() {
       setBlastMessage("")
       setSubject("")
     } catch (error: unknown) {
-      if ((error as any)?.response) {
-        setError((error as any).response.data.message)
+      if ((error as ApiResponseError)?.response) {
+        setError((error as ApiResponseError).response.data.message)
       } else {
         setError("failed to send the blast")
       }
@@ -133,8 +133,8 @@ function SubscriptionManagementPage() {
         setMessage("Unsubscribed successfully");
         mutate("/subscriptions")
       } catch (error: unknown) {
-        if ((error as any)?.response) {
-          setError((error as any).response.data.message)
+        if ((error as ApiResponseError)?.response) {
+          setError((error as ApiResponseError).response.data.message)
         } else {
           setError("Failed to unsubscribe")
         }
@@ -148,8 +148,8 @@ function SubscriptionManagementPage() {
         setMessage("Unsubscribed successfully");
         mutate("/subscriptions")
       } catch (error: unknown) {
-        if ((error as any)?.response) {
-          setError((error as any).response.data.message)
+        if ((error as ApiResponseError)?.response) {
+          setError((error as ApiResponseError).response.data.message)
         } else {
           setError("Failed to resubscribe")
         }
@@ -170,8 +170,8 @@ function SubscriptionManagementPage() {
         setMessage("Subscriber deleted successfully")
         mutate("/subscriptions")
       } catch (error: unknown) {
-        if ((error as any)?.response) {
-          setError((error as any).response.data.message)
+        if ((error as ApiResponseError)?.response) {
+          setError((error as ApiResponseError).response.data.message)
         } else {
           setError("failed to delete")
         }

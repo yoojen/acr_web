@@ -390,3 +390,11 @@ export interface CalendarEvent {
   title: string;
   start: string;
 }
+
+export interface ApiResponseError extends Error {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+}

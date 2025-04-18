@@ -21,7 +21,7 @@ const PreferredCommunication = ({
             type="radio"
             name="preferredCom"
             checked={data.comm_type === method.value ? true : false}
-            onChange={(e) => { }}
+            onChange={() => { }}
           />
           <label
             htmlFor="phoneChoice"

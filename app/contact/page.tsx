@@ -1,6 +1,7 @@
 "use client"
 import { requestAxios } from '@/api';
 import ContactForm from '@/components/ContactForm'
+import { ApiResponseError } from '@/interface';
 import { useEffect, useState } from 'react'
 import useSWRMutation from 'swr/mutation';
 
@@ -61,8 +62,8 @@ const ContactUs = () => {
         comm_type: "", message: ""
       })
     } catch (error: unknown) {
-      if (error instanceof Error && (error as any).response) {
-        setError((error as any).response.data.message)
+      if (error instanceof Error && (error as ApiResponseError).response) {
+        setError((error as ApiResponseError).response.data.message)
       } else {
         setError("failed to send message")
       }

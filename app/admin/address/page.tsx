@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import components from "../components";
-import { Address } from "@/interface";
+import { Address, ApiResponseError } from "@/interface";
 import useSWR, { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
 import { requestAxios } from "@/api";
@@ -95,8 +95,8 @@ function AddressManagementPage() {
         });
         setCurrentAddress(null);
       } catch (error: unknown) {
-        if (error instanceof Error && (error as any).response) {
-          setError((error as any).response.data.message)
+        if (error instanceof Error && (error as ApiResponseError).response) {
+          setError((error as ApiResponseError).response.data.message)
         } else {
           setError("Failed to update address")
         }
@@ -133,8 +133,8 @@ function AddressManagementPage() {
         setError("")
         setMessage("Address added successfully!");
       } catch (error: unknown) {
-        if (error instanceof Error && (error as any).response) {
-          setError((error as any).response.data.message)
+        if (error instanceof Error && (error as ApiResponseError).response) {
+          setError((error as ApiResponseError).response.data.message)
         } else {
           setError("Failed to create member")
         }
@@ -160,8 +160,8 @@ function AddressManagementPage() {
         setError("")
         mutate("/company")
       } catch (error: unknown) {
-        if (error instanceof Error && (error as any).response) {
-          setError((error as any).response.data.message)
+        if (error instanceof Error && (error as ApiResponseError).response) {
+          setError((error as ApiResponseError).response.data.message)
           setMessage("")
         } else {
           setError("Failed to create member")

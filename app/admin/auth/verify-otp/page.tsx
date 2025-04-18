@@ -6,6 +6,7 @@ import { useAuth } from "@/context/authContext";
 import { requestAxios } from "@/api";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { ApiResponseError } from "@/interface";
 
 const VerifyOtp: React.FC = () => {
     const [otp, setOtp] = useState<string>('')
@@ -34,7 +35,7 @@ const VerifyOtp: React.FC = () => {
                     router.push('/admin/auth/reset-password');
                 }
             } catch (error: unknown) {
-                setError((error as any)?.response?.data?.message || 'Something went wrong. Try again')
+                setError((error as ApiResponseError)?.response?.data?.message || 'Something went wrong. Try again')
                 return;
             }
         }())

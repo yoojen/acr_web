@@ -4,9 +4,9 @@ import assets from "@/public";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { useAuth } from "@/context/authContext";
 import { requestAxios } from "@/api";
 import { useRouter } from "next/navigation";
+import { ApiResponseError } from "@/interface";
 
 const Login = () => {
   // States
@@ -57,8 +57,8 @@ const Login = () => {
         }
       } catch (error: unknown) {
         setIsLoading(false)
-        if (error instanceof Error && (error as any).response?.data?.message) {
-          setLoginError((error as any).response.data.message);
+        if (error instanceof Error && (error as ApiResponseError).response?.data?.message) {
+          setLoginError((error as ApiResponseError).response.data.message);
         } else {
           setLoginError("An error occurred. Please try again later.");
         }

@@ -3,7 +3,7 @@ import { AiFillEdit } from "react-icons/ai";
 import components from "../components";
 import { requestAxios } from "@/api";
 import withAuth from "@/HOC/withAuth";
-import { User } from "@/interface";
+import { ApiResponseError, User } from "@/interface";
 import React, { useState, useEffect } from "react";
 import useSWR, { mutate } from "swr";
 import useSWRMutation from "swr/mutation"
@@ -115,8 +115,8 @@ const UserManagement = () => {
       // setIsModalOpen(false);
 
     } catch (error: unknown) {
-      if (error instanceof Error && (error as any).response) {
-        setError((error as any).response.data.message)
+      if (error instanceof Error && (error as ApiResponseError).response) {
+        setError((error as ApiResponseError).response.data.message)
       } else {
         setError("Failed to create user")
       }
@@ -149,8 +149,8 @@ const UserManagement = () => {
       mutate("/users")
 
     } catch (error: unknown) {
-      if (error instanceof Error && (error as any).response) {
-        setError((error as any).response.data.message)
+      if (error instanceof Error && (error as ApiResponseError).response) {
+        setError((error as ApiResponseError).response.data.message)
       } else {
         setError("Failed to update user")
       }
@@ -173,8 +173,8 @@ const UserManagement = () => {
         mutate("/users")
       }
     } catch (error: unknown) {
-      if (error instanceof Error && (error as any).response) {
-        setError((error as any).response.data.message)
+      if (error instanceof Error && (error as ApiResponseError).response) {
+        setError((error as ApiResponseError).response.data.message)
       } else {
         setError("Failed to update user")
       }
@@ -197,8 +197,8 @@ const UserManagement = () => {
       setError("")
       mutate("/users")
     } catch (error: unknown) {
-      if (error instanceof Error && (error as any).response) {
-        setError((error as any).response.data.message)
+      if (error instanceof Error && (error as ApiResponseError).response) {
+        setError((error as ApiResponseError).response.data.message)
       } else {
         setError("Failed to create member")
       }
@@ -328,8 +328,8 @@ const UserManagement = () => {
                 focus:outline-none transition-all duration-200 ease-in-out hover:border-gray-400"
               >
                 <option value="">...</option>
-                <option value={process.env.NEXT_PUBLIC_ACR_EDITOR}>Editor</option>
-                <option value={process.env.NEXT_PUBLIC_ACR_ADMIN}>Admin</option>
+                <option value={process.env._ACR_EDITOR}>Editor</option>
+                <option value={process.env._ACR_ADMIN}>Admin</option>
               </select>
 
               <div className="flex justify-end my-2">

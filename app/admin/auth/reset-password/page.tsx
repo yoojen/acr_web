@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 import { requestAxios } from "@/api";
 import { useAuth } from "@/context/authContext";
 import Link from "next/link";
+import { ApiResponseError } from "@/interface";
 
 const ResetPassword = () => {
     const [psd1, setPsd1] = useState<string>('')
@@ -48,7 +49,7 @@ const ResetPassword = () => {
                 setMessage('')
                 setError('')
             } catch (error: unknown) {
-                setError((error as any)?.response?.data?.message || 'Something went wrong try again')
+                setError((error as ApiResponseError)?.response?.data?.message || 'Something went wrong try again')
             }
         }())
     }

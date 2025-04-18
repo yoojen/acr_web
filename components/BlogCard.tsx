@@ -26,7 +26,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   onEdit,
   onDelete,
 }) => {
-
+  console.log(blog_header_img)
   return (
     <div className="border rounded-md shadow-lg overflow-scroll h-[250px] relative">
 
@@ -39,6 +39,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
               src={`https://api.accountants.co.rw${blog_header_img}`}
               alt="Blog Header"
               className="w-full h-full object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         )}

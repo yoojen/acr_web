@@ -30,7 +30,7 @@ function withAuth<T extends object>(WrappedComponent: React.ComponentType<T>) {
             if (error) {
                 router.replace("/admin/auth/login");
             }
-        }, [error, router]);
+        }, [error]);
 
 
         if (!isLoading && auth.user.email) return <WrappedComponent {...props} />;

@@ -18,7 +18,7 @@ const ACRTeam = () => {
     return (
         <section className="py-16 bg-background">
             <Heading title="Meet Our Team" subtitle="Our team of professionals is ready to help you with all your accounting needs." />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-24">
                 {!isLoading && !error && acrTeam?.map((person, index) => {
                     return (
                         <TeamCard

@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
 import Image from "next/image";
-import { Search } from "lucide-react";
+// import { Search } from "lucide-react";
 import Logo from "@/public/ACR-Logo.png";
 import { MenuItem } from "@/interface";
 
@@ -370,7 +370,7 @@ const Header = () => {
             ))}
           </div>
 
-          <div className="hidden md:flex relative">
+          {/* <div className="hidden md:flex relative">
             <input
               type="text"
               placeholder="Type and hit enter"
@@ -380,7 +380,7 @@ const Header = () => {
               className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500"
               size={20}
             />
-          </div>
+          </div> */}
 
           <button
             onClick={() => setIsOpen(!isOpen)}

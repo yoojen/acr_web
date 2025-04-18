@@ -1,3 +1,4 @@
+"use client"
 import ProfileBody from '@/components/ProfileBody'
 import ProfileHeader from '@/components/ProfileHeader'
 import withAuth from '@/HOC/withAuth'

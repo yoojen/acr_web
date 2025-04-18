@@ -6,7 +6,7 @@ import useSWR, { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
 import { requestAxios } from "@/api";
 import Image from "next/image";
-import { uploadBase64Image } from "../team/page";
+import { uploadBase64Image } from "@/utils/upload_utils";
 import withAuth from "@/HOC/withAuth";
 
 

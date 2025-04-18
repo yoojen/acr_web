@@ -41,7 +41,6 @@ const ForgetPassword = () => {
                     router.push('/admin/auth/verify-otp')
                 }
             } catch (error) {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 setError((error as ApiResponseError)?.response?.data?.message || 'Something went wrong try again')
                 return;
             }

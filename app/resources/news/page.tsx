@@ -4,6 +4,7 @@ import BlogCard from "@/components/BlogCard";
 import Paginate from "@/components/Paginate";
 import Heading from "@/components/shared/Headings";
 import { subscribeToNewsLetter } from "@/components/SubscribePopUp";
+import { ApiResponseError } from "@/interface";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import useSWR from "swr"
@@ -61,8 +62,8 @@ const Page = () => {
       setMessage("You have successfully subscribed to our newsletter")
       setError("")
     } catch (error: unknown) {
-      if (error instanceof Error && (error as any).response) {
-        setError((error as any).response.data.message)
+      if (error instanceof Error && (error as ApiResponseError).response) {
+        setError((error as ApiResponseError).response.data.message)
       } else {
         setError("failed to subscribe")
       }

@@ -1,8 +1,7 @@
 "use client";
-import { useRouter } from "next/navigation"; // Use next/navigation in Next.js 13+ (app router)
-import { CSSProperties, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { requestAxios } from "@/api";
-import { ClipLoader } from "react-spinners";
 import { useAuth } from "@/context/authContext";
 import useSWR from "swr";
 

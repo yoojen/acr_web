@@ -185,6 +185,11 @@ const Blog = () => {
         : await requestAxios.post(URL, payload);
 
       if ([200, 201].includes(response.status)) {
+        setCreatingNewBlog(false)
+        setIsEditing(false)
+        setHeaderImage("")
+        setTitle("")
+        setBlogContent("<p></p>")
         setMessage(response.data.message);
         setError("");
         setIsFetching((prev) => !prev);

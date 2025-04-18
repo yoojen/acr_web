@@ -75,7 +75,7 @@ const SubscribePopUp = () => {
     <>
       {isPopupOpen && (
         <div className="fixed inset-0 z-30 flex items-center justify-center bg-gray-800 bg-opacity-20">
-          <div className="w-1/3 bg-white rounded-3xl shadow-md p-5 space-y-4 relative">
+          <div className="w-4/5 md:w-1/3 bg-white rounded-3xl shadow-md p-5 space-y-4 relative">
             {error && <p className="text-red-500 text-sm my-5">{error}</p>}
             {message && <p className="text-sky-500 text-sm my-5">{message}</p>}
 

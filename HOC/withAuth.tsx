@@ -29,9 +29,9 @@ function withAuth<T extends object>(WrappedComponent: React.ComponentType<T>) {
 
         useEffect(() => {
             if (error) {
-                return router.replace("/admin/auth/login");
+                router.replace("/admin/auth/login");
             }
-        }, [error]);
+        }, [error, router]);
 
 
         if (!isLoading && auth.user.email) return <WrappedComponent {...props} />;

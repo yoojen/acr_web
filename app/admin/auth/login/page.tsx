@@ -3,7 +3,7 @@ import LoginInput from "@/components/LoginInput";
 import assets from "@/public";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { requestAxios } from "@/api";
 import { useRouter } from "next/navigation";
 import { ApiResponseError } from "@/interface";
@@ -21,6 +21,18 @@ const Login = () => {
   const [loginError, setLoginError] = useState("");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const router = useRouter();
+
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (loginError) {
+        setLoginError("");
+      }
+    }, 3000)
+
+    return () => clearTimeout(timeout)
+  }, [loginError])
+
 
   // Handlers
   const handleLogin = (e: React.FormEvent) => {

@@ -26,7 +26,15 @@ const BlogCard: React.FC<BlogCardProps> = ({
   onEdit,
   onDelete,
 }) => {
-  console.log(blog_header_img)
+
+  const descriptionSubstring = blog_header_img
+    ? isClient
+      ? 80 : 80
+    : isClient
+      ? 350
+      : 100
+
+
   return (
     <div className="border rounded-md shadow-lg overflow-scroll h-[250px] relative">
 
@@ -68,9 +76,9 @@ const BlogCard: React.FC<BlogCardProps> = ({
             <p className="text-lg mb-2">Author: {author}</p>
             <div className="text-sm text-gray-600">
               {isClient
-                ? parse(description.substring(0, 80), HtmlParserOptions)
-                : parse(description.substring(0, 20), HtmlParserOptions)
-              }...
+                ? parse(description.substring(0, descriptionSubstring) + "...", HtmlParserOptions)
+                : parse(description.substring(0, descriptionSubstring) + "...", HtmlParserOptions)
+              }
               <span className="text-sky-500">
                 <Link href={`${isClient ? `/resources/news/${id}` : `/admin/blog/${id}`}`}>readmore</Link>
               </span>

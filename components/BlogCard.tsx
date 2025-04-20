@@ -6,11 +6,11 @@ import Link from "next/link";
 import HtmlParserOptions from "@/utils/htmlParser";
 
 interface BlogCardProps {
-  id: string;
+  id?: string;
   blog_header_img: string;
   title: string;
   description: string;
-  author: string;
+  author?: string;
   isClient: boolean;
   onEdit?: (id: string) => void;
   onDelete?: (id: string) => void;
@@ -51,13 +51,13 @@ const BlogCard: React.FC<BlogCardProps> = ({
             {
               !isClient && <div className="flex justify-end [&>*]:cursor-pointer">
                 <p
-                  onClick={() => onEdit && onEdit(id)}
+                  onClick={() => id && onEdit && onEdit(id)}
                   className="px-4 py-2 text-blue-500  hover:underline"
                 >
                   Edit
                 </p>
                 <p
-                  onClick={() => onDelete && onDelete(id)}
+                  onClick={() => id && onDelete && onDelete(id)}
                   className="px-4 py-2 text-red-500  hover:underline"
                 >
                   Delete

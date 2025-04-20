@@ -4,39 +4,46 @@ import BlogCard from "@/components/BlogCard";
 import BlogModal from "@/components/BlogModal";
 import Paginate from "@/components/Paginate";
 import withAuth from "@/HOC/withAuth";
-import { ApiResponseError } from "@/interface";
 import { uploadFile } from "@/utils/upload_utils";
-import React, { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import useSWR, { mutate } from "swr";
+import useSWRMutation from "swr/mutation";
+
+
 
 export interface blogList {
-  id: string;
+  id?: string;
   title: string;
   header_image_url: string;
   description: string;
-  author: string;
-}
-export interface blogObject {
-  total_counts: number;
-  total_pages: number;
-  total_page_items: number;
-  current_page: number;
-  previous_page: number;
-  next_page: number;
-  rows: blogList[];
+  author?: string;
 }
 
+async function fetcher(url: string) {
+  const response = await requestAxios.get(url, { withCredentials: true })
+  const { rows, ...metadata } = response.data.data;
+  return { rows, metadata }
+}
+
+async function addBlog(url: string, { arg }: { arg: blogList }) {
+  const response = await requestAxios.post(url, arg, { withCredentials: true })
+  return response.data;
+}
+
+async function updateBlog(url: string, { arg }: { arg: blogList }) {
+  const { id, ...updatedObject } = arg;
+  const response = await requestAxios.put(`${url}/${id}`, updatedObject, { withCredentials: true })
+  return response.data;
+}
+
+async function deleteBlog(url: string, { arg }: { arg: { id: string } }) {
+  const response = await requestAxios.delete(`${url}/${arg.id}`, { withCredentials: true })
+  return response.data;
+}
+
+
 const Blog = () => {
-  const [blogs, setBlogs] = useState<blogObject>({
-    total_counts: 0,
-    total_pages: 0,
-    total_page_items: 0,
-    current_page: 0,
-    previous_page: 0,
-    next_page: 0,
-    rows: [],
-  });
   const [isEditing, setIsEditing] = useState(false);
-  const [isFetching, setIsFetching] = useState(false);
   const [creatingNewBlog, setCreatingNewBlog] = useState(false);
   const [headerImage, setHeaderImage] = useState("");
   const [title, setTitle] = useState("");
@@ -45,7 +52,17 @@ const Blog = () => {
   const [error, setError] = useState("");
   const [scrollPosition, setScrollPosition] = useState(0);
   const [blogId, setBlogId] = useState("");
+  const [pageIndex, setPageIndex] = useState(1)
   let blogContent = "";
+
+
+  const { data, isLoading, error: swrError } = useSWR(`/blogs?page=${pageIndex}`, fetcher)
+  const blogData: blogList[] = data?.rows;
+  const blogMetadata = data?.metadata;
+  const { trigger: addBlogTrigger } = useSWRMutation("/blogs/create-blog", addBlog)
+  const { trigger: updateBlogTrigger } = useSWRMutation("/blogs/modify", updateBlog)
+  const { trigger: deleteBlogTrigger } = useSWRMutation("/blogs/erase", deleteBlog)
+
 
   /* Scroll user back to where he was before editing*/
   useEffect(() => {
@@ -66,34 +83,32 @@ const Blog = () => {
   }, [isEditing, creatingNewBlog, scrollPosition]);
 
   useEffect(() => {
-    (async function () {
-      try {
-        const response = await requestAxios.get("/blogs");
-        if (response.status === 200) {
-          setBlogs(response.data.data);
-        }
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("Failed to fetch blogs");
-        }
+    const timeout = setTimeout(() => {
+      if (error) {
+        setError("")
       }
-    })();
-  }, [isFetching]);
+      if (message) {
+        setMessage("")
+      }
+    }, 3000)
+    return () => clearTimeout(timeout)
+  }, [error, message])
+
 
   /* THIS FUNCTION SETUP THINGS FOR EDITING BLOG */
   const onEdit = (id: string) => {
     setMessage("");
     setError("");
-    const blog = blogs.rows.find((blog) => blog.id === id);
+
+    const blog = blogData.find((blog) => blog.id === id);
     if (!blog) {
       setError("No blog selected!");
       return;
     }
+
     setScrollPosition(window.scrollY);
     if (blog) {
-      setBlogId(blog.id);
+      blog.id && setBlogId(blog.id);
       setTitle(blog.title);
       setHeaderImage(blog.header_image_url);
       setBlogContent(blog.description);
@@ -102,27 +117,23 @@ const Blog = () => {
   };
 
   /* THIS FUNCTION HANDLE BLOG DELETION */
-  const onDelete = (id: string) => {
+  const onDelete = async (id: string) => {
     const yes = confirm(`Do you really want to delete this Blog: ${id}`);
     if (yes) {
-      (async function () {
-        try {
-          const response = await requestAxios.delete(`/blogs/erase/${id}`);
-          if (response.status === 204) {
-            setMessage("Blog Deleted!");
-            setBlogs({
-              ...blogs,
-              rows: blogs.rows.filter((blog) => blog.id !== id),
-            });
-          }
-        } catch (error: unknown) {
-          if (error instanceof Error && (error as ApiResponseError).response) {
-            setError((error as ApiResponseError).response.data.message);
-          } else {
-            setError("failed to delete");
-          }
+      mutate("/blogs", blogData.filter(blog => blog.id !== id), false)
+
+      try {
+        await deleteBlogTrigger({ id })
+        mutate("/blogs")
+        setMessage("Blog Deleted!");
+      } catch (error: unknown) {
+        if (error instanceof Error && (error as any).response) {
+          setError((error as any).response.data.message);
+        } else {
+          setError("failed to delete");
         }
-      })();
+        mutate("/blogs")
+      }
     }
   };
 
@@ -161,9 +172,6 @@ const Blog = () => {
   /*FUNCTION FOR CREATING OR UPDATING BLOG */
   const handleCreateOrEditBlog = async (e: FormEvent) => {
     e.preventDefault();
-    const URL = isEditing
-      ? `https://api.accountants.co.rw/blogs/modify/${blogId}`
-      : "https://api.accountants.co.rw/blogs/create-blog";
 
     try {
 
@@ -175,32 +183,35 @@ const Blog = () => {
       });
 
       const payload = {
-        title,
-        description: ccc,
-        header_image_url: headerImage,
-        image_urls,
+        id: blogId, title, description: ccc,
+        header_image_url: headerImage, image_urls,
       };
-      const response = isEditing
-        ? await requestAxios.put(URL, payload)
-        : await requestAxios.post(URL, payload);
-
-      if ([200, 201].includes(response.status)) {
-        setCreatingNewBlog(false)
-        setIsEditing(false)
-        setHeaderImage("")
-        setTitle("")
-        setBlogContent("<p></p>")
-        setMessage(response.data.message);
-        setError("");
-        setIsFetching((prev) => !prev);
+      if (isEditing) {
+        await updateBlogTrigger(payload)
+        mutate("/blogs")
+        setMessage("Blog updated successfully");
       }
+
+      if (!isEditing) {
+        mutate("/blogs", [...blogData, payload], false)
+        await addBlogTrigger(payload)
+        mutate("/blogs")
+        setMessage("Blog created successfully");
+      }
+
+      blogContent = ""
+      setBlogId("")
+      setTitle("");
+      setHeaderImage("");
+      setBlogContent("");
+      setError("");
     } catch (error: unknown) {
-      if (error instanceof Error && (error as ApiResponseError).response) {
-        setError((error as ApiResponseError)?.response?.data?.message || "An unknown error occurred")
+      if (error instanceof Error && (error as any).response) {
+        setError((error as any)?.response?.data?.message || "An unknown error occurred")
       } else {
         setError("failed to delete")
       }
-      console.error("Failed to save blog:", error);
+      mutate("/blogs")
     }
   };
 
@@ -214,8 +225,8 @@ const Blog = () => {
           description={ccc}
           message={message}
           error={error}
-          setTitle={setTitle}
           creatingNewBlog={creatingNewBlog}
+          setTitle={setTitle}
           setIsEditing={setIsEditing}
           setCreatingNewBlog={setCreatingNewBlog}
           handleCreateOrBlogBlog={handleCreateOrEditBlog}
@@ -243,8 +254,8 @@ const Blog = () => {
             </button>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 [&>*]:mb-10 transition-all duration-1000 ease-in-out">
-            {blogs &&
-              blogs.rows.map((blog, idx) => {
+            {!isLoading && !error && blogData &&
+              blogData.map((blog, idx) => {
                 return (
                   <BlogCard
                     key={idx}
@@ -260,16 +271,17 @@ const Blog = () => {
                 );
               })}
           </div>
-          <Paginate
-            total_page_items={blogs.total_page_items}
-            total_pages={blogs.total_pages}
-            current_page={blogs.current_page}
-            previous_page={blogs.previous_page}
-            next_page={blogs.next_page}
-            requestURL={"/blogs"}
-            setBlogs={setBlogs}
-            setError={setError}
-          />
+          {
+            !isLoading && !error && blogMetadata &&
+            <Paginate
+              total_page_items={blogMetadata.total_page_items}
+              total_pages={blogMetadata.total_pages}
+              current_page={blogMetadata.current_page}
+              previous_page={blogMetadata.previous_page}
+              next_page={blogMetadata.next_page}
+              setPageIndex={setPageIndex}
+            />
+          }
         </div>
       )}
     </div>

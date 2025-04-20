@@ -29,8 +29,9 @@ const Page = () => {
   const [error, setError] = useState("")
   const [message, setMessage] = useState("")
   const [email, setEmail] = useState("");
+  const [pageIndex, setPageIndex] = useState(1)
 
-  const { data } = useSWR("/blogs", blogFetcher)
+  const { data } = useSWR(`/blogs?page=${pageIndex}`, blogFetcher)
   const blogs: Blog[] = data?.rows;
   const metadata = data?.metadata;
   const { trigger: subscribeTrigger, isMutating } = useSWRMutation("/subscriptions/create-sub", subscribeToNewsLetter)
@@ -139,7 +140,7 @@ const Page = () => {
             current_page={metadata.current_page}
             previous_page={metadata.previous_page}
             next_page={metadata.next_page}
-            requestURL={"/blogs"}
+            setPageIndex={setPageIndex}
           />
         }
       </div>

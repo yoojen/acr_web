@@ -45,6 +45,7 @@ function SubscriptionManagementPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState("")
   const [message, setMessage] = useState("")
+  const [pageIndex, setPageIndex] = useState(1)
   const [newEmail, setNewEmail] = useState("");
   const [subject, setSubject] = useState("")
   const [blastMessage, setBlastMessage] = useState('<p></p>')
@@ -275,7 +276,7 @@ function SubscriptionManagementPage() {
           current_page={metadata.current_page}
           previous_page={metadata.previous_page}
           next_page={metadata.next_page}
-          requestURL={"/subscriptions"}
+          setPageIndex={setPageIndex}
         />
       }
 

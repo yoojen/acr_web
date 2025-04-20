@@ -1,8 +1,5 @@
 "use client"
 
-import { requestAxios } from "@/api";
-import { blogObject } from "@/app/admin/blog/page";
-import { ApiResponseError } from "@/interface";
 import { Dispatch, SetStateAction } from "react";
 
 interface PaginateProps {
@@ -11,32 +8,10 @@ interface PaginateProps {
     current_page: number;
     previous_page: number | null;
     next_page: number | null;
-    requestURL: string;
-    setBlogs?: Dispatch<SetStateAction<blogObject>>
-    setError?: (value: string) => void;
+    setPageIndex: Dispatch<SetStateAction<number>>
 }
 
-const Paginate = ({ total_pages, current_page, requestURL, setBlogs, setError }: PaginateProps) => {
-
-    const handleGetData = (page: number, requestURL: string) => {
-        (async function () {
-            try {
-                const response = await requestAxios.get(`${requestURL}?page=${page}`)
-                if (response.status === 200 && setBlogs) {
-                    setBlogs(response.data.data)
-                }
-            } catch (error: unknown) {
-                if (error instanceof Error && 'response' in error && setError) {
-                    setError((error as ApiResponseError).response?.data?.message || "Failed to fetch");
-                } else {
-                    if (setError) {
-                        setError("Failed to fetch");
-                    }
-                }
-            }
-
-        }())
-    }
+const Paginate = ({ total_pages, current_page, setPageIndex }: PaginateProps) => {
 
     return (
         <div className="flex justify-end my-5">
@@ -45,7 +20,7 @@ const Paginate = ({ total_pages, current_page, requestURL, setBlogs, setError }:
                 && current_page !== 1
                 && <button
                     className={`bg-blue-400 text-white font-medium border rounded-sm px-5 py-1 hover:bg-sky-400`}
-                    onClick={() => handleGetData(current_page - 1, requestURL)}
+                    onClick={() => setPageIndex(current_page - 1)}
                 >
                     Prev
                 </button>
@@ -62,7 +37,7 @@ const Paginate = ({ total_pages, current_page, requestURL, setBlogs, setError }:
                 && current_page !== total_pages
                 && <button
                     className={`bg-blue-400 text-white font-medium border rounded-sm px-5 py-1 hover:bg-sky-400`}
-                    onClick={() => handleGetData(current_page + 1, requestURL)}
+                    onClick={() => setPageIndex(current_page + 1)}
                 >
                     Next
                 </button>

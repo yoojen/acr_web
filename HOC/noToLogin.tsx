@@ -1,5 +1,5 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation"; // Use next/navigation in Next.js 13+ (app router)
+import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/authContext";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { requestAxios } from "@/api";

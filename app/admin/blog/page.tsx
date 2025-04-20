@@ -4,6 +4,7 @@ import BlogCard from "@/components/BlogCard";
 import BlogModal from "@/components/BlogModal";
 import Paginate from "@/components/Paginate";
 import withAuth from "@/HOC/withAuth";
+import { ApiResponseError } from "@/interface";
 import { uploadFile } from "@/utils/upload_utils";
 import { FormEvent, useEffect, useState } from "react";
 import useSWR, { mutate } from "swr";
@@ -56,7 +57,7 @@ const Blog = () => {
   let blogContent = "";
 
 
-  const { data, isLoading, error: swrError } = useSWR(`/blogs?page=${pageIndex}`, fetcher)
+  const { data, isLoading } = useSWR(`/blogs?page=${pageIndex}`, fetcher)
   const blogData: blogList[] = data?.rows;
   const blogMetadata = data?.metadata;
   const { trigger: addBlogTrigger } = useSWRMutation("/blogs/create-blog", addBlog)
@@ -107,8 +108,8 @@ const Blog = () => {
     }
 
     setScrollPosition(window.scrollY);
-    if (blog) {
-      blog.id && setBlogId(blog.id);
+    if (blog && blog.id) {
+      setBlogId(blog.id);
       setTitle(blog.title);
       setHeaderImage(blog.header_image_url);
       setBlogContent(blog.description);
@@ -127,8 +128,8 @@ const Blog = () => {
         mutate("/blogs")
         setMessage("Blog Deleted!");
       } catch (error: unknown) {
-        if (error instanceof Error && (error as any).response) {
-          setError((error as any).response.data.message);
+        if (error instanceof Error && (error as ApiResponseError).response) {
+          setError((error as ApiResponseError).response.data.message);
         } else {
           setError("failed to delete");
         }
@@ -206,8 +207,8 @@ const Blog = () => {
       setBlogContent("");
       setError("");
     } catch (error: unknown) {
-      if (error instanceof Error && (error as any).response) {
-        setError((error as any)?.response?.data?.message || "An unknown error occurred")
+      if (error instanceof Error && (error as ApiResponseError).response) {
+        setError((error as ApiResponseError)?.response?.data?.message || "An unknown error occurred")
       } else {
         setError("failed to delete")
       }

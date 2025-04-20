@@ -52,7 +52,7 @@ function SubscriptionManagementPage() {
   const [isBlastModalOpen, setIsBlastModalOpen] = useState(false)
   let blastContent = ''
 
-  const { data } = useSWR("/subscriptions", fetcher)
+  const { data } = useSWR(`/subscriptions?page=${pageIndex}`, fetcher)
   const subscribers: Subscriber[] = data?.rows;
   const metadata = data?.metadata;
   const { trigger: addSubscriberTrigger, isMutating } = useSWRMutation("/subscriptions/create-sub", addSubscriber)

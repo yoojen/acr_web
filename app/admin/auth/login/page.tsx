@@ -123,7 +123,7 @@ const Login = () => {
 
 
   return (
-    <div className="w-3/4 md:w-1/2 lg:w-1/3 translate-y-2/5">
+    <div className="w-3/4 lg:w-1/3 translate-y-2/5">
       <div className="flex items-center justify-center mb-20">
         <Image src={assets.Logo} alt="ACR Logo" width={230} height={95} />
       </div>

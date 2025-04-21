@@ -124,142 +124,142 @@ const Header = () => {
             },
           ],
         },
-        {
-          title: "Trainings Offered",
-          items: [
-            {
-              id: "accounting-training",
-              bgColor: "bg-purple-100",
-              dotColor: "bg-purple-400",
-              title: "Accounting Training",
-              description: "Learn professional accounting practices.",
-              href: "/services/accounting-training",
-            },
-            {
-              id: "tax-training",
-              bgColor: "bg-green-100",
-              dotColor: "bg-green-400",
-              title: "Tax Training",
-              description: "Master tax preparation & compliance.",
-              href: "/services/tax-training",
-            },
-            {
-              id: "quickbooks-training",
-              bgColor: "bg-blue-100",
-              dotColor: "bg-blue-400",
-              title: "QuickBooks Training",
-              description: "Certified QuickBooks courses for professionals.",
-              href: "/services/quickbooks-training",
-            },
-            {
-              id: "microsoft-training",
-              bgColor: "bg-orange-100",
-              dotColor: "bg-orange-400",
-              title: "Microsoft Training",
-              description: "Master Microsoft 365 & Azure tools.",
-              href: "/services/microsoft-training",
-            },
-          ],
-        },
+        // {
+        //   title: "Trainings Offered",
+        //   items: [
+        //     {
+        //       id: "accounting-training",
+        //       bgColor: "bg-purple-100",
+        //       dotColor: "bg-purple-400",
+        //       title: "Accounting Training",
+        //       description: "Learn professional accounting practices.",
+        //       href: "/services/accounting-training",
+        //     },
+        //     {
+        //       id: "tax-training",
+        //       bgColor: "bg-green-100",
+        //       dotColor: "bg-green-400",
+        //       title: "Tax Training",
+        //       description: "Master tax preparation & compliance.",
+        //       href: "/services/tax-training",
+        //     },
+        //     {
+        //       id: "quickbooks-training",
+        //       bgColor: "bg-blue-100",
+        //       dotColor: "bg-blue-400",
+        //       title: "QuickBooks Training",
+        //       description: "Certified QuickBooks courses for professionals.",
+        //       href: "/services/quickbooks-training",
+        //     },
+        //     {
+        //       id: "microsoft-training",
+        //       bgColor: "bg-orange-100",
+        //       dotColor: "bg-orange-400",
+        //       title: "Microsoft Training",
+        //       description: "Master Microsoft 365 & Azure tools.",
+        //       href: "/services/microsoft-training",
+        //     },
+        //   ],
+        // },
       ],
     },
-    /*{
-      id: "resource",
-      label: "Resource",
-      hasMegaMenu: true,
-      megaMenuItems: [
-        {
-          title: "Learning Center",
-          items: [
-            {
-              id: "blog",
-              bgColor: "bg-zinc-100",
-              dotColor: "bg-zinc-400",
-              title: "News",
-              description: "Latest insights and updates.",
-              href: "/resources/news",
-            },
-            {
-              id: "guides",
-              bgColor: "bg-yellow-100",
-              dotColor: "bg-yellow-400",
-              title: "Guides",
-              description: "Step-by-step tutorials and guides.",
-              isNew: true,
-              href: "/resources/guides",
-            },
-            {
-              id: "webinars",
-              bgColor: "bg-pink-100",
-              dotColor: "bg-pink-400",
-              title: "Webinars",
-              description: "Access recorded and live sessions.",
-              href: "/resources/webinars",
-            },
-          ],
-        },
-        {
-          title: "Support",
-          items: [
-            {
-              id: "faq",
-              bgColor: "bg-teal-100",
-              dotColor: "bg-teal-400",
-              title: "Frequently Asked Questions",
-              description: "Find answers to common questions",
-              href: "/resources/faq",
-            },
-            {
-              id: "privacy-policy",
-              bgColor: "bg-rose-100",
-              dotColor: "bg-rose-400",
-              title: "Privacy Policy",
-              description: "Collaborate & share knowledge.",
-              href: "/resources/privacy-policy",
-            },
-            {
-              id: "support-center",
-              bgColor: "bg-lime-100",
-              dotColor: "bg-lime-400",
-              title: "Support Center",
-              description: "Get help & assistance.",
-              href: "/resources/support-center",
-            },
-          ],
-        },
-        {
-          title: "Case Studies",
-          items: [
-            {
-              id: "small-business-success",
-              bgColor: "bg-indigo-100",
-              dotColor: "bg-indigo-400",
-              title: "Small Business Success",
-              description: "How we helped small businesses grow.",
-              href: "/resources/small-business-success",
-            },
-            {
-              id: "tax-optimization",
-              bgColor: "bg-red-100",
-              dotColor: "bg-red-400",
-              title: "Tax Optimization",
-              description: "Reducing tax burdens for clients.",
-              href: "/resources/tax-optimization",
-            },
-            {
-              id: "it-solution-impact",
-              bgColor: "bg-blue-100",
-              dotColor: "bg-blue-400",
-              title: "IT Solution Impact",
-              description: "Boosting efficiency with our IT solutions.",
-              href: "/resources/it-solution-impact",
-            },
-          ],
-        },
-      ],
-    },*/
-    { id: "contact", label: "Contact", href: "/contact" },
+    // {
+    //   id: "resource",
+    //   label: "Resource",
+    //   hasMegaMenu: true,
+    //   megaMenuItems: [
+    //     {
+    //       title: "Learning Center",
+    //       items: [
+    //         {
+    //           id: "blog",
+    //           bgColor: "bg-zinc-100",
+    //           dotColor: "bg-zinc-400",
+    //           title: "News",
+    //           description: "Latest insights and updates.",
+    //           href: "/resources/news",
+    //         },
+    //         {
+    //           id: "guides",
+    //           bgColor: "bg-yellow-100",
+    //           dotColor: "bg-yellow-400",
+    //           title: "Guides",
+    //           description: "Step-by-step tutorials and guides.",
+    //           isNew: true,
+    //           href: "/resources/guides",
+    //         },
+    //         {
+    //           id: "webinars",
+    //           bgColor: "bg-pink-100",
+    //           dotColor: "bg-pink-400",
+    //           title: "Webinars",
+    //           description: "Access recorded and live sessions.",
+    //           href: "/resources/webinars",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       title: "Support",
+    //       items: [
+    //         {
+    //           id: "faq",
+    //           bgColor: "bg-teal-100",
+    //           dotColor: "bg-teal-400",
+    //           title: "Frequently Asked Questions",
+    //           description: "Find answers to common questions",
+    //           href: "/resources/faq",
+    //         },
+    //         {
+    //           id: "privacy-policy",
+    //           bgColor: "bg-rose-100",
+    //           dotColor: "bg-rose-400",
+    //           title: "Privacy Policy",
+    //           description: "Collaborate & share knowledge.",
+    //           href: "/resources/privacy-policy",
+    //         },
+    //         {
+    //           id: "support-center",
+    //           bgColor: "bg-lime-100",
+    //           dotColor: "bg-lime-400",
+    //           title: "Support Center",
+    //           description: "Get help & assistance.",
+    //           href: "/resources/support-center",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       title: "Case Studies",
+    //       items: [
+    //         {
+    //           id: "small-business-success",
+    //           bgColor: "bg-indigo-100",
+    //           dotColor: "bg-indigo-400",
+    //           title: "Small Business Success",
+    //           description: "How we helped small businesses grow.",
+    //           href: "/resources/small-business-success",
+    //         },
+    //         {
+    //           id: "tax-optimization",
+    //           bgColor: "bg-red-100",
+    //           dotColor: "bg-red-400",
+    //           title: "Tax Optimization",
+    //           description: "Reducing tax burdens for clients.",
+    //           href: "/resources/tax-optimization",
+    //         },
+    //         {
+    //           id: "it-solution-impact",
+    //           bgColor: "bg-blue-100",
+    //           dotColor: "bg-blue-400",
+    //           title: "IT Solution Impact",
+    //           description: "Boosting efficiency with our IT solutions.",
+    //           href: "/resources/it-solution-impact",
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
     // { id: "resources", label: "Resources", href: "/resources" },
+    { id: "contact", label: "Contact", href: "/contact" },
     { id: "blog", label: "Blog", href: "/resources/news" },
     { id: "faq", label: " FAQs", href: "/resources/faq" }
   ];
@@ -267,7 +267,7 @@ const Header = () => {
   return (
     <header>
       <div className="container mx-auto px-4 py-4">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-around items-center">
           <Link href="/">
             <Image src={Logo} alt="Logo" width={100} height={100} />
           </Link>
@@ -317,9 +317,9 @@ const Header = () => {
                 )}
 
                 {item.hasMegaMenu && activeMegaMenu === item.id && (
-                  <div className="absolute left-1/2 transform -translate-x-1/2 z-10 mt-2 w-[90vw] max-w-6xl min-w-[300px] px-4 sm:px-6">
+                  <div className="absolute left-1/2 transform -translate-x-1/2 z-10 mt-2 w-[50vw] max-w-6xl min-w-[300px] md:max-h-[800px] overflow-auto px-4 sm:px-6">
                     <div className="overflow-hidden rounded-lg shadow-lg">
-                      <div className="relative grid grid-cols-1 gap-6 bg-white p-6 lg:grid-cols-3">
+                      <div className="grid grid-cols-1 gap-6 bg-white p-6 lg:grid-cols-2">
                         {item.megaMenuItems?.map((section, index) => (
                           <div key={index} className="p-4">
                             <h3 className="text-sm font-medium text-gray-500 mb-5">
@@ -400,16 +400,16 @@ const Header = () => {
                   <>
                     <button
                       className="flex items-center text-gray-600 hover:text-primary bg-transparent hover:bg-transparent font-normal pl-4"
-                      onClick={() =>
-                        setActiveMegaMenu(
-                          activeMegaMenu === item.id ? null : item.id
-                        )
-                      }
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveMegaMenu(item.id);
+                      }}
+
                     >
-                      <span>{item.label}</span>
+                      {activeMegaMenu !== item.id && <span>{item.label}</span>}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className={`h-4 w-4 transition-transform ${activeMegaMenu === item.id ? "rotate-180" : ""
+                        className={`h-4 w-4 transition-transform ${activeMegaMenu === item.id ? "hidden" : ""
                           }`}
                         fill="none"
                         viewBox="0 0 24 24"
@@ -422,10 +422,33 @@ const Header = () => {
                           d="M19 9l-7 7-7-7"
                         />
                       </svg>
+                      {
+                        activeMegaMenu === item.id &&
+                        <button onClick={() => {
+                          setActiveMegaMenu(null)
+                        }}
+                          className="flex items-center text-gray-600 hover:text-primary bg-transparent hover:bg-transparent font-normal pl-4">
+                          <span>{item.label}</span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={`h-4 w-4 transition-transform ${activeMegaMenu === item.id ? "" : "hidden"}`}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M5 15l7-7 7 7"
+                            />
+                          </svg>
+                        </button>
+                      }
                     </button>
-
-                    {activeMegaMenu === item.id && (
-                      <div className="pl-4 mt-2 space-y-2">
+                    {/* {alert(`ActiveMega: ${activeMegaMenu}, ItemID: ${item.id}. ${activeMegaMenu === item.id}`)} */}
+                    {
+                      activeMegaMenu === item?.id && <div className="pl-4 mt-2 space-y-2">
                         {item.megaMenuItems?.map((section) => (
                           <div key={section.title} className="mb-4">
                             <h3 className="text-sm font-medium text-gray-500 mb-2">
@@ -454,7 +477,8 @@ const Header = () => {
                           </div>
                         ))}
                       </div>
-                    )}
+
+                    }
                   </>
                 ) : (
                   <Link

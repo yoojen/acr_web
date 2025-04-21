@@ -9,7 +9,6 @@ const HomePage = () => {
       <components.Hero slides={heroSlides} />
       <components.Service />
       <components.Expectation />
-      <components.Latest />
       <components.Testimonials />
       <SubscribePopUp />
     </div>

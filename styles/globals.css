@@ -234,3 +234,10 @@ footer a:hover {
   padding: 0 2rem;
   list-style: decimal !important;
 }
+ol {
+  list-style-type: auto;
+}
+
+ul{
+  list-style-type: disc;
+}

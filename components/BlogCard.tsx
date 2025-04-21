@@ -36,7 +36,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
 
   return (
-    <div className="border rounded-md shadow-lg overflow-scroll h-[250px] relative">
+    <div className="border rounded-md shadow-lg overflow-auto h-[250px] relative">
 
       {/* Header Image */}
       <div className="h-full flex">

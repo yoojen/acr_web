@@ -35,17 +35,19 @@ function SingleBlog({ blogid }: { blogid: string }) {
                 blog && blog.author ? (
                     <>
                         <h1 className="text-3xl font-bold mt-10">{blog?.title}</h1>
-                        <div className="w-full my-10 rounded-lg shadow-lg">
-                            <Image
-                                src={`https://api.accountants.co.rw${blog?.header_image_url as string}`}
-                                alt={blog?.title || "Blog header image"}
-                                width={0}
-                                height={0}
-                                sizes="100vw"
-                                className="w-full h-auto"
-                                priority
-                            />
-                        </div>
+                        {blog?.header_image_url &&
+                            <div className="w-full my-10 rounded-lg shadow-lg">
+                                <Image
+                                    src={`https://api.accountants.co.rw${blog?.header_image_url as string}`}
+                                    alt={blog?.title || "Blog header image"}
+                                    width={0}
+                                    height={0}
+                                    sizes="100vw"
+                                    className="w-full h-auto"
+                                    priority
+                                />
+                            </div>
+                        }
                         <h4 className="text-gray-600 mb-6">Author: {blog?.author}</h4>
                         <div className="prose max-w-none">
                             {

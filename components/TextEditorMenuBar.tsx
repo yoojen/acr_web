@@ -62,7 +62,7 @@ const TextEditorMenuBar = ({ editor, isBlog, isSubscription }: TextEditorProps) 
         {
             icon: <RiListOrdered className="size-5" />,
             onClick: () => editor.chain().focus().toggleOrderedList().run(),
-            isActive: editor.isActive('ol')
+            isActive: editor.isActive('orderedList')
         },
         {
             icon: <RiListUnordered className="size-5" />,
